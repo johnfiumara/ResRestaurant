@@ -1,6 +1,4 @@
 import { Item } from "@prisma/client";
-import { HTMLInputTypeAttribute } from "react";
-
 
 export default function MenuCard({ item }: { item: Item }) {
   return (

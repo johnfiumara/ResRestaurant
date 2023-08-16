@@ -11,7 +11,7 @@ const fetchRestaurantMenu = async (slug: string) => {
     },
     select: {
       items: true,
-    }
+    },
   });
 
   if (!restaurant) {
@@ -22,16 +22,16 @@ const fetchRestaurantMenu = async (slug: string) => {
 };
 
 export default async function RestaurantMenu({
-  params
+  params,
 }: {
-  params: { slug: string};
+  params: { slug: string };
 }) {
   const menu = await fetchRestaurantMenu(params.slug);
 
   return (
     <>
       <div className="bg-white w-[100%] rounded p-3 shadow">
-        <RestaurantNavBar slug={"params.slug"}/>
+        <RestaurantNavBar slug={params.slug} />
         <Menu menu={menu} />
       </div>
     </>
