@@ -68,7 +68,7 @@ const useAuth = () => {
     });
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/signup",
+        "https://prnyckkpngvdhmvrsacd.supabase.co",
         {
           email,
           password,
