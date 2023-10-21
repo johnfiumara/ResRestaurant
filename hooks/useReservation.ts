@@ -34,7 +34,7 @@ export default function useReservation() {
 
     try {
       const response = await axios.post(
-        `https://prnyckkpngvdhmvrsacd.supabase.co`,
+        `https://prnyckkpngvdhmvrsacd.supabase.co/v1/rest/`,
         {
           bookerFirstName,
           bookerLastName,
