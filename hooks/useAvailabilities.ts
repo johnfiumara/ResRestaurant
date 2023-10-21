@@ -11,7 +11,7 @@ export default function useAvailabilities(){
         setLoading(true)
 
         try {
-            const response = await axios.get(`https://prnyckkpngvdhmvrsacd.supabase.co`, {
+            const response = await axios.get(`https://prnyckkpngvdhmvrsacd.supabase.co/v1/rest/`, {
                 params: {
                     day,
                     time,
