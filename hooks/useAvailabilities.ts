@@ -1,7 +1,10 @@
 import {useState} from "react"
 import axios from "axios"
+import { createClient } from "@supabase/supabase-js"
+import supabase from "../config/supabaseClient";
+import * from "@supabase/supabase-js";
 
-export default function useAvailabilities(){
+export default function useAvailabilities()  {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
     const [data, setData] = useState<{time: string; available: boolean}[] | null>(null)
@@ -11,14 +14,15 @@ export default function useAvailabilities(){
         setLoading(true)
 
         try {
-            const response = await axios.get(`https://prnyckkpngvdhmvrsacd.supabase.co`, {
+            const {data} = await supabase 
+            .from, {
                 params: {
                     day,
                     time,
                     partySize
                 }
             });
-            console.log(response)
+            console.log(error)
             setLoading(false)
             setData(response.data)
         } catch (error: any) {

@@ -1,5 +1,7 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import axios from "axios";
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
+import supabase from "../config/supabaseClient";
 
 export default function useReservation() {
   const [loading, setLoading] = useState(false);
@@ -33,8 +35,9 @@ export default function useReservation() {
     setLoading(true);
 
     try {
-      const response = await axios.post(
-        `https://prnyckkpngvdhmvrsacd.supabase.co`,
+      const response = await supabase
+      .from('url'),
+      .insert( 
         {
           bookerFirstName,
           bookerLastName,
@@ -50,6 +53,7 @@ export default function useReservation() {
             partySize,
           },
         }
+      )
       );
 
       setLoading(false);

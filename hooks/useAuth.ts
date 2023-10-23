@@ -4,12 +4,7 @@ import { useContext } from "react";
 import { AuthenticationContext } from "../app/context/AuthContext";
 import { createClient} from "@supabase/supabase-js";
 import { error } from "console";
-
-
-const url ='https://prnyckkpngvdhmvrsacd.supabase.co/rest/v1/restaurant/User';
-const anonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBybnlja2twbmd2ZGhtdnJzYWNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTEyNTUyMTksImV4cCI6MjAwNjgzMTIxOX0.VK7btRaCoK8e2joB4XuhbkxgiL5isZuin'
-
-const supabase = createClient(url,anonKey,)
+import supabase from "./../config/supabaseClient";
 
 
 const useAuth = () => {
