@@ -1,4 +1,4 @@
-import { PRICE, PrismaClient } from "@prisma/client";
+import { PRICE, PrismaClient } from "@prisma/client/edge";
 import Header from "./components/Header";
 import RestaurantCard from "./components/RestaurantCard";
 import SearchSideBar from "./components/SearchSideBar";
@@ -73,7 +73,7 @@ export default async function Search({
   return (
     <>
       <Header />
-      <div className="flex py-4 m-auto w-2/3 justify-between items-start">
+      <div className="flex items-start justify-between w-2/3 py-4 m-auto">
         <SearchSideBar
           locations={location}
           cuisines={cuisine}

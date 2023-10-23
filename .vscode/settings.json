@@ -1,4 +1,7 @@
 {
-  "typescript.tsdk": "node_modules\\typescript\\lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "prisma-smart-formatter.typescript.defaultFormatter": "svipas.prettier-plus",
+  "prisma-smart-formatter.typescriptreact.defaultFormatter": "vscode.typescript-language-features",
+  "prisma-smart-formatter.prisma.defaultFormatter": "Prisma.prisma"
 }
