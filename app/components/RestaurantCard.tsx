@@ -32,8 +32,3 @@ export default function RestaurantCard({ restaurant }: Props) {
     </div>
   );
 }
-
-
-
-//
-//
