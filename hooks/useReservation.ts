@@ -1,5 +1,10 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import axios from "axios";
+import {createClient} from "@supabase/supabase-js"
+
+const supabaseUrl = 'https://prnyckkpngvdhmvrsacd.supabase.co'
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBybnlja2twbmd2ZGhtdnJzYWNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTEyNTUyMTksImV4cCI6MjAwNjgzMTIxOX0.VK7btRaCoK8e2joB4XuhbkxgiL5isZuinK3ZzcLxqG4'
+const supabase = createClient(supabaseUrl, supabaseKey)
 
 export default function useReservation() {
   const [loading, setLoading] = useState(false);
@@ -33,28 +38,28 @@ export default function useReservation() {
     setLoading(true);
 
     try {
-      const response = await axios.post(
-        `http://localhost:3000/api/restaurant/${slug}/reserve`,
-        {
-          bookerFirstName,
-          bookerLastName,
-          bookerPhone,
-          bookerEmail,
-          bookerOccasion,
-          bookerRequest,
-        },
-        {
-          params: {
-            day,
-            time,
-            partySize,
-          },
-        }
-      );
+     
+const { data, error } = await supabase
+.from('Booking')
+.insert([
+    {
+          bookers_first_name:bookerFirstName,
+          bookiers_last_name:bookerLastName,
+          booker_phone:bookerPhone,
+          booker_email:bookerEmail,
+          booker_occasion:bookerOccasion,
+          booker_request:bookerRequest,
+          number_of_people:partySize,
+        }],)
+
+.select(); 
+      
+        
+      
 
       setLoading(false);
       setDidBook(true);
-      return response.data;
+      return data;
     } catch (error: any) {
       setLoading(false);
       setError(error.response.data.errorMessage);

@@ -1,11 +1,13 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import validator from "validator";
-import { PrismaClient } from "@prisma/client";
+
 import bcrypt from "bcrypt";
 import * as jose from "jose";
 import { setCookie } from "cookies-next";
+import {createClient} from '@supabase/supabase-js'
+import supabase from "../../../utils/supabaseConfig";
 
-const prisma = new PrismaClient();
+
 
 export default async function handler(
   req: NextApiRequest,
@@ -58,13 +60,10 @@ export default async function handler(
       return res.status(400).json({ errorMessage: errors[0] });
     }
 
-    const userWithEmail = await prisma.user.findUnique({
-      where: {
-        email,
-      },
-    });
+    const userWithEmail = await supabase.from("User").select("*").eq("email",email).single();
+    
 
-    if (userWithEmail) {
+    if (userWithEmail != null ) {
       return res
         .status(400)
         .json({ errorMessage: "Email is associated with another account" });
@@ -72,22 +71,24 @@ export default async function handler(
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = await prisma.user.create({
-      data: {
+    const {data,error} = await supabase.from("User").insert(
+       { 
         first_name: firstName,
         last_name: lastName,
         password: hashedPassword,
-        city,
-        phone,
-        email,
-      },
-    });
+        city:city,
+        phone:phone,
+        email:email,
+       }
+    ).select();
+    
+    
 
     const alg = "HS256";
 
     const secret = new TextEncoder().encode(process.env.JWT_SECRET);
 
-    const token = await new jose.SignJWT({ email: user.email })
+    const token = await new jose.SignJWT({ email: email })
       .setProtectedHeader({ alg })
       .setExpirationTime("24h")
       .sign(secret);
@@ -95,11 +96,11 @@ export default async function handler(
     setCookie("jwt", token, { req, res, maxAge: 60 * 6 * 24 });
 
     return res.status(200).json({
-      firstName: user.first_name,
-      lastName: user.last_name,
-      email: user.email,
-      phone: user.phone,
-      city: user.city,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phone: phone,
+      city: city,
     });
   }
 

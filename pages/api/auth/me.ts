@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
-
+import {createClient } from '@supabase/supabase-js'
 import jwt from "jsonwebtoken";
-import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
+import supabase from "../../../utils/supabaseConfig";
+
 
 export default async function handler(
   req: NextApiRequest,
@@ -20,31 +20,24 @@ export default async function handler(
     });
   }
 
-  const user = await prisma.user.findUnique({
-    where: {
-      email: payload.email,
-    },
-    select: {
-      id: true,
-      first_name: true,
-      last_name: true,
-      email: true,
-      city: true,
-      phone: true,
-    },
-  });
+  const { data: { user } } = await supabase.auth.getUser("jwt");
+const { data, error } = await supabase
+  .from('User')
+  .select('id, first_name, last_name, email, city, phone')
+  .eq('id', user?.id);
 
-  if (!user) {
-    return res.status(401).json({
-      errorMessage: "User not found",
-    });
-  }
-
-  return res.json({
-    id: user.id,
-    firstName: user.first_name,
-    lastName: user.last_name,
-    phone: user.phone,
-    city: user.city,
+if (error) {
+  return res.status(401).json({
+    errorMessage: "User not found",
   });
 }
+
+const userData = data[0];
+
+return res.json({
+  id: userData.id,
+  firstName: userData.first_name,
+  lastName: userData.last_name,
+  phone: userData.phone,
+  city: userData.city,
+});}

@@ -1,5 +1,7 @@
 import {useState} from "react"
 import axios from "axios"
+import { createClient } from "@supabase/supabase-js"
+import supabase from "../utils/supabaseConfig"
 
 export default function useAvailabilities(){
     const [loading, setLoading] = useState(false)
