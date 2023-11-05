@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import validator from "validator";
 import bcrypt from "bcrypt";
 import * as jose from "jose";
-import { setCookies,getCookies}  from "cookies-next";
+import { setCookie}  from "cookies-next";
 
 const prisma = new PrismaClient();
 
@@ -67,7 +67,7 @@ export default async function handler(
       .setExpirationTime("24h")
       .sign(secret);
 
-    setCookies("jwt", token, { req, res, maxAge: 60 * 6 * 24 });
+    setCookie("jwt", token, { req, res, maxAge: 60 * 6 * 24 });
 
     return res.status(200).json({
       firstName: user.first_name,
