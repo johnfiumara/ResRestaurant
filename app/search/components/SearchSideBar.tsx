@@ -1,5 +1,6 @@
 import { Cuisine, Location, PRICE } from "@prisma/client";
 import Link from "next/link";
+import prisma from "../../../prisma/client";
 
 export default function SearchSideBar({
   locations,

@@ -4,6 +4,7 @@ import halfStar from "../../public/icons/half-star.png";
 import emptyStar from "../../public/icons/empty-star.png";
 import Image from "next/image";
 import { Review } from "@prisma/client";
+import prisma from "./../../prisma/client"
 import { calculateReviewRatingAverage } from "../../utils/calculateReviewRatingAverage";
 
 export default function Stars({

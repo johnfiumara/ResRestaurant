@@ -7,8 +7,7 @@ import ReservationCard from "./components/ReservationCard";
 import RestaurantNavBar from "./components/RestaurantNavBar";
 import Reviews from "./components/Reviews";
 import Title from "./components/Title";
-
-const prisma = new PrismaClient();
+import prisma from "./../../../prisma/client";
 
 interface Restaurant {
   id: number;

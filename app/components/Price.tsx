@@ -1,4 +1,5 @@
 import { PRICE } from "@prisma/client";
+import prisma from "./../../prisma/client"
 import React from "react";
 
 export default function Price({ price }: { price: PRICE }) {

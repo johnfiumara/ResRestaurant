@@ -1,4 +1,6 @@
-import { Item } from "@prisma/client";
+import { Item, } from "@prisma/client";
+
+import prisma from "./../../../../prisma/client"
 
 export default function MenuCard({ item }: { item: Item }) {
   return (

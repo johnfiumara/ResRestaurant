@@ -1,5 +1,6 @@
 import { Review } from "@prisma/client";
 import ReviewCard from "./ReviewCard";
+import prisma from "../../../../prisma/client";
 
 export default function Reviews({ reviews }: { reviews: Review[] }) {
   return (
