@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import axios from "axios";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
-import supabase from "../config/supabaseClient";
+import supabase as  "../config/supabaseClient";
 
 export default function useReservation() {
   const [loading, setLoading] = useState(false);
