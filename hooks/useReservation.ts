@@ -36,7 +36,7 @@ export default function useReservation() {
 
     try {
       const response = await supabase
-      .from('url'),
+      .from('url')
       .insert( 
         {
           bookerFirstName,
