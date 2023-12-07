@@ -11,7 +11,7 @@ export default function useAvailabilities(){
         setLoading(true)
 
         try {
-            const response = await axios.get(`http://localhost:3000/api/restaurant/${slug}/availability`, {
+            const response = await axios.get(`https://vercel.com/johnfiumara/res-restaurant/api/restaurant/${slug}/availability`, {
                 params: {
                     day,
                     time,
