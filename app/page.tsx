@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import Header from "./components/Header";
 import RestaurantCard from "./components/RestaurantCard";
 import { PrismaClient, Cuisine, Location, PRICE, Review } from "@prisma/client";

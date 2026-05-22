@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { PrismaClient, Review } from "@prisma/client";
 import { notFound } from "next/navigation";
 import Description from "./components/Description";
