@@ -2,9 +2,6 @@ import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 import { times } from "../../../../data";
 import { findAvailabileTables } from "../../../../services/restaurant/findAvailableTables";
-import { createClient } from "@supabase/supabase-js";
-import supabase from "../../../../utils/supabaseConfig";
-
 const prisma = new PrismaClient();
 
 export default async function handler(
@@ -25,12 +22,11 @@ export default async function handler(
       });
     }
 
-    const { data: restaurant, error } = await supabase
-      .from("your_table_name")
-      .select("tables, open_time, close_time")
-      .eq("slug", slug)
-      .single();
-      
+    const restaurant = await prisma.restaurant.findUnique({
+      where: { slug },
+      select: { tables: true, open_time: true, close_time: true },
+    });
+
     if (!restaurant) {
       return res.status(400).json({
         errorMessage: "Invalid data provided",
